@@ -13,7 +13,7 @@ class Layout extends Component{
         this.setState({showSideDrawer:false})
     }
     //setting the state when it depends on old state
-    SideDrawerToogleHandler =()=>{
+    SideDrawerToggleHandler =()=>{
         this.setState((prevState)=>{
             return {showSideDrawer: !prevState.showSideDrawer};
     });
@@ -21,7 +21,7 @@ class Layout extends Component{
     render(){
         return(
                 <Aux>
-                <Toolbar drawerToggleClicked={this.SideDrawerToogleHandler}/>
+                <Toolbar drawerToggleClicked={this.SideDrawerToggleHandler}/>
                 <SideDrawer closed={this.SideDrawerCloseHandler}
                 open={this.state.showSideDrawer}/>
                 <main className={classes.Content}>

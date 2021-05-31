@@ -11,7 +11,8 @@ const order = (props)=>{
         return<span 
         style={{textTransform:'capitalize',
         display:'inline-block',
-        margin:'0 8px',
+        margin:'5px 8px',
+        backgroundColor:'lightGreen',
         border:'1px solid #ccc',
         padding: '5px',
         borderRadius:'8px'
