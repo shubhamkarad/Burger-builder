@@ -14,7 +14,7 @@ const withErrorHandler = (WrapperComponent, axios)=>{
         }
         //Using the constructor or willMount be the same.
         // Before Child components are render.
-        componentWillMount(){
+        UNSAFE_componentWillMount(){
              this.reqInterceptors = axios.interceptors.request.use(req=>{
                 this.setState({error:null});
                 return req;
