@@ -21,12 +21,12 @@ export const purchaseBurgerStart = ()=>{
         type:actionTypes.PURCHASE_BURGER_START
     }
 } 
-export const purchaseBurger = (orderData)=>{
+export const purchaseBurger = (orderData, token)=>{
     return dispatch=>{
          //whatever you pass as an endoint URL it will automatically created in Firebase.  
         //Always make sure to add .json at the end.
         dispatch(purchaseBurgerStart());
-        axios.post('/orders.json', orderData)
+        axios.post('/orders.json?auth=' + token, orderData)
             .then(response=> {
                 //Set the spinner false to close it
                 // this.setState({loading:false});
@@ -47,7 +47,11 @@ export const purchaseInit = ()=>{
         type:actionTypes.PURCHASE_INIT
     }
 }
-
+export const fetchOrderStart = ()=>{
+    return{
+        type: actionTypes.FETCH_ORDERS_START,
+    }
+}
 export const fetchOrderSuccess = (orders)=>{
     return{
         type: actionTypes.FETCH_ORDERS_SUCCESS,
@@ -60,14 +64,12 @@ export const fetchOrderFail = (error)=>{
         error:error
     }
 }
-export const fetchOrderStart = ()=>{
-    return{
-        type: actionTypes.FETCH_ORDERS_START,
-    }
-}
-export const fetchOrders =()=>{
+export const fetchOrders =(token, userId)=>{
     return dispatch=>{
-        axios.get('/orders.json') 
+        dispatch(fetchOrderStart());
+        //This variable use to show the orders by userId or we can say User specific Order
+        const queryParams =  '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+        axios.get('/orders.json'+ queryParams) 
             .then(res=>{
                 const fetchedOrders=[];
                 for(let key in res.data){
@@ -76,7 +78,7 @@ export const fetchOrders =()=>{
                         id:key
                         });
                 }
-                console.log(res.data);
+                // console.log(res.data)
                 dispatch(fetchOrderSuccess(fetchedOrders))
                 // this.setState({loading:false, orders:fetchedOrders})
             })

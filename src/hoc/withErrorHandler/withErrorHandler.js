@@ -25,7 +25,7 @@ const withErrorHandler = (WrapperComponent, axios)=>{
         }
         //Whenever we don't need the burger builder component it will remove the interceptors.
         componentWillUnmount(){
-            console.log('will unMount');
+            // console.log('will unMount');
             axios.interceptors.request.eject(this.reqInterceptors);
             axios.interceptors.response.eject(this.resInterceptors);
         }

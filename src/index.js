@@ -13,12 +13,14 @@ import reportWebVitals from './reportWebVitals';
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 import orderReducer from "./store/reducers/order";
 // import burger from './components/Burger/Burger';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import authReducer from "./store/reducers/auth";
+//The process env variable is use to hide the redux devtools for a public it only visible when we are in development mode.
+const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
   burgerBuilder : burgerBuilderReducer,
-  order : orderReducer
+  order : orderReducer,
+  auth : authReducer
 
 })
 const store = createStore(rootReducer,composeEnhancers(
